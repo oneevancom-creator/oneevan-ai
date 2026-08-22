@@ -1,1 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
 
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>OneEvan AI Business Center</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            min-height:100vh;
+
+            font-family:
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            Roboto,
+            Arial,
+            sans-serif;
+
+            background:
+            radial-gradient(
+                circle at 20% 20%,
+                #202020 0%,
+                transparent 35%
+            ),
+            radial-gradient(
+                circle at 80% 80%,
+                #151515 0%,
+                transparent 40%
+            ),
+            #050505;
+
+            color:#fff;
+
+            display:flex;
+            align-items:center;
+            justify-content:center;
+
+            overflow:hidden;
+        }
+
+        /* Background */
+
+        .background{
+            position:fixed;
+            inset:0;
+
+            pointer-events:none;
+
+            overflow:hidden;
+        }
+
+        .orb{
+            position:absolute;
+
+            width:350px;
+            height:350px;
+
+            border-radius:50%;
+
+            filter:blur(90px);
+
+            opacity:.25;
+
+            animation:
+            float 8s ease-in-out infinite;
+        }
+
+        .orb.one{
+            background:#ffffff;
+            top:-150px;
+            left:-120px;
+        }
+
+        .orb.two{
+            background:#555;
+            right:-150px;
+            bottom:-150px;
+
+            animation-delay:2s;
+        }
+
+        @keyframes float{
+
+            0%,100%{
+                transform:translate(0,0);
+            }
+
+            50%{
+                transform:translate(30px,-25px);
+            }
+
+        }
+
+        /* Container */
+
+        .container{
+
+            width:
+            min(1100px,92%);
+
+            position:relative;
+
+            z-index:2;
+
+            display:grid;
+
+            grid-template-columns:
+            1fr 1fr;
+
+            gap:70px;
+
+            align-items:center;
+        }
+
+        /* Left */
+
+        .brand{
+
+            animation:
+            fadeUp .8s ease forwards;
+        }
+
+        .logo{
+
+            width:65px;
+            height:65px;
+
+            border-radius:20px;
+
+            background:#fff;
+
+            color:#111;
+
+            display:flex;
+
+            align-items:center;
+            justify-content:center;
+
+            font-size:30px;
+
+            font-weight:800;
+
+            margin-bottom:25px;
+
+            box-shadow:
+            0 15px 40px #000;
+        }
+
+        .tag{
+
+            display:inline-block;
+
+            padding:7px 12px;
+
+            border-radius:20px;
+
+            background:#ffffff10;
+
+            border:
+            1px solid #ffffff15;
+
+            font-size:11px;
+
+            color:#aaa;
+
+            margin-bottom:18px;
+        }
+
+        h1{
+
+            font-size:
+            clamp(38px,5vw,65px);
+
+            line-height:1.05;
+
+            letter-spacing:-3px;
+
+            margin-bottom:20px;
+        }
+
+        h1 span{
+
+            color:#aaa;
+
+        }
+
+        .description{
+
+            max-width:500px;
+
+            color:#999;
+
+            font-size:15px;
+
+            line-height:1.8;
+
+        }
+
+        .features{
+
+            display:flex;
+
+            flex-wrap:wrap;
+
+            gap:10px;
+
+            margin-top:28px;
+        }
+
+        .feature{
+
+            padding:9px 13px;
+
+            border-radius:12px;
+
+            background:#ffffff08;
+
+            border:
+            1px solid #ffffff12;
+
+            color:#bbb;
+
+            font-size:11px;
+        }
+
+        /* Login card */
+
+        .card{
+
+            background:
+            linear-gradient(
+                145deg,
+                #ffffff12,
+                #ffffff05
+            );
+
+            border:
+            1px solid #ffffff15;
+
+            border-radius:30px;
+
+            padding:35px;
+
+            backdrop-filter:
+            blur(30px);
+
+            box-shadow:
+            0 30px 100px #000;
+
+            animation:
+            fadeUp 1s ease forwards;
+
+        }
+
+        .card h2{
+
+            font-size:25px;
+
+            margin-bottom:8px;
+
+        }
+
+        .card p{
+
+            color:#888;
+
+            font-size:12px;
+
+            margin-bottom:25px;
+
+        }
+
+        .login-btn{
+
+            width:100%;
+
+            height:52px;
+
+            border:0;
+
+            border-radius:15px;
+
+            background:#fff;
+
+            color:#111;
+
+            font-size:14px;
+
+            font-weight:700;
+
+            cursor:pointer;
+
+            transition:.25s;
+
+        }
+
+        .login-btn:hover{
+
+            transform:
+            translateY(-2px);
+
+            box-shadow:
+            0 10px 30px #fff2;
+
+        }
+
+        .login-btn:active{
+
+            transform:
+            scale(.98);
+
+        }
+
+        .status{
+
+            display:flex;
+
+            justify-content:center;
+
+            align-items:center;
+
+            gap:7px;
+
+            margin-top:18px;
+
+            color:#777;
+
+            font-size:10px;
+
+        }
+
+        .dot{
+
+            width:7px;
+            height:7px;
+
+            border-radius:50%;
+
+            background:#5cff8d;
+
+            box-shadow:
+            0 0 10px #5cff8d;
+
+        }
+
+        .copyright{
+
+            margin-top:25px;
+
+            text-align:center;
+
+            color:#555;
+
+            font-size:9px;
+
+        }
+
+        @keyframes fadeUp{
+
+            from{
+
+                opacity:0;
+
+                transform:
+                translateY(25px);
+
+            }
+
+            to{
+
+                opacity:1;
+
+                transform:
+                translateY(0);
+
+            }
+
+        }
+
+        /* Mobile */
+
+        @media(max-width:800px){
+
+            body{
+
+                overflow:auto;
+
+                padding:40px 0;
+
+            }
+
+            .container{
+
+                grid-template-columns:1fr;
+
+                gap:35px;
+
+            }
+
+            h1{
+
+                font-size:43px;
+
+            }
+
+            .card{
+
+                padding:25px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="background">
+
+        <div class="orb one"></div>
+
+        <div class="orb two"></div>
+
+    </div>
+
+
+    <main class="container">
+
+
+        <!-- BRAND -->
+
+        <section class="brand">
+
+            <div class="logo">
+                O
+            </div>
+
+            <div class="tag">
+                ONEEVAN • AI BUSINESS CENTER
+            </div>
+
+            <h1>
+
+                Your Business.
+                <br>
+
+                <span>Powered by AI.</span>
+
+            </h1>
+
+            <p class="description">
+
+                Manage your products, customers,
+                orders, business knowledge and
+                AI customer support from one
+                professional dashboard.
+
+            </p>
+
+
+            <div class="features">
+
+                <div class="feature">
+                    🤖 AI Assistant
+                </div>
+
+                <div class="feature">
+                    🛍️ Products
+                </div>
+
+                <div class="feature">
+                    📦 Orders
+                </div>
+
+                <div class="feature">
+                    👥 Customers
+                </div>
+
+                <div class="feature">
+                    💬 Messages
+                </div>
+
+                <div class="feature">
+                    📊 Analytics
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LOGIN -->
+
+        <section class="card">
+
+            <h2>
+                Admin Center
+            </h2>
+
+            <p>
+                Access your OneEvan
+                business dashboard.
+            </p>
+
+
+            <button
+                class="login-btn"
+                onclick="enterDashboard()"
+            >
+
+                Continue to Dashboard
+
+            </button>
+
+
+            <div class="status">
+
+                <span class="dot"></span>
+
+                System Ready
+
+            </div>
+
+
+            <div class="copyright">
+
+                © 2026 OneEvan.
+                All rights reserved.
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        function enterDashboard(){
+
+            /*
+             * Dashboard তৈরি হলে
+             * এখানে dashboard.html এ যাবে।
+             */
+
+            window.location.href =
+            "dashboard.html";
+
+        }
+
+    </script>
+
+</body>
+</html>
