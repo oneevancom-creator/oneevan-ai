@@ -1,1 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>OneEvan AI — Products</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    background:#f5f5f7;
+    color:#111;
+}
+
+button,input,select,textarea{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    width:250px;
+    background:#090909;
+    color:#fff;
+    padding:24px 15px;
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:0 10px 28px;
+    border-bottom:1px solid #ffffff12;
+    margin-bottom:20px;
+}
+
+.logo-icon{
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    background:#fff;
+    color:#111;
+    display:grid;
+    place-items:center;
+    font-weight:800;
+}
+
+.logo-text{
+    font-size:15px;
+    font-weight:700;
+}
+
+.logo-text small{
+    display:block;
+    font-size:8px;
+    color:#777;
+    margin-top:3px;
+}
+
+.nav-title{
+    font-size:9px;
+    color:#666;
+    padding:0 11px 8px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.nav-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    width:100%;
+    padding:12px;
+    margin:3px 0;
+    border-radius:12px;
+    color:#999;
+    font-size:12px;
+    transition:.2s;
+}
+
+.nav-item:hover{
+    background:#ffffff08;
+    color:#fff;
+}
+
+.nav-item.active{
+    background:#fff;
+    color:#111;
+}
+
+.nav-icon{
+    width:20px;
+    text-align:center;
+}
+
+.sidebar-bottom{
+    position:absolute;
+    left:15px;
+    right:15px;
+    bottom:20px;
+}
+
+.main{
+    margin-left:250px;
+    min-height:100vh;
+}
+
+.header{
+    height:72px;
+    background:#fff;
+    border-bottom:1px solid #e8e8e8;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 30px;
+}
+
+.header-left{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.menu{
+    display:none;
+    border:0;
+    background:#f2f2f2;
+    width:38px;
+    height:38px;
+    border-radius:10px;
+}
+
+.search{
+    width:260px;
+    height:38px;
+    background:#f5f5f7;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    padding:0 12px;
+    color:#999;
+    font-size:11px;
+}
+
+.search input{
+    border:0;
+    outline:0;
+    background:transparent;
+    width:100%;
+    margin-left:8px;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.header-btn{
+    width:38px;
+    height:38px;
+    border:0;
+    border-radius:10px;
+    background:#f5f5f7;
+}
+
+.admin{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    padding-left:8px;
+}
+
+.avatar{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    background:#111;
+    color:#fff;
+    display:grid;
+    place-items:center;
+    font-size:11px;
+}
+
+.content{
+    padding:30px;
+}
+
+.page-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.page-head h1{
+    font-size:27px;
+    letter-spacing:-.7px;
+}
+
+.page-head p{
+    color:#888;
+    font-size:12px;
+    margin-top:5px;
+}
+
+.primary{
+    border:0;
+    background:#111;
+    color:#fff;
+    padding:12px 17px;
+    border-radius:11px;
+    font-size:11px;
+    font-weight:600;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.stat{
+    background:#fff;
+    border:1px solid #e9e9e9;
+    border-radius:16px;
+    padding:17px;
+}
+
+.stat small{
+    color:#888;
+    font-size:10px;
+}
+
+.stat h2{
+    margin-top:7px;
+    font-size:24px;
+}
+
+.toolbar{
+    background:#fff;
+    border:1px solid #e9e9e9;
+    border-radius:16px;
+    padding:14px;
+    display:flex;
+    gap:10px;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.toolbar input,
+.toolbar select{
+    height:38px;
+    border:1px solid #e4e4e4;
+    border-radius:9px;
+    padding:0 12px;
+    outline:none;
+    background:#fff;
+    font-size:11px;
+}
+
+.toolbar input{
+    flex:1;
+}
+
+.table-card{
+    background:#fff;
+    border:1px solid #e9e9e9;
+    border-radius:17px;
+    overflow:hidden;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    text-align:left;
+    background:#fafafa;
+    color:#888;
+    font-size:9px;
+    font-weight:600;
+    padding:14px;
+    text-transform:uppercase;
+}
+
+td{
+    padding:13px 14px;
+    border-top:1px solid #f0f0f0;
+    font-size:11px;
+}
+
+.product{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.product-img{
+    width:48px;
+    height:48px;
+    border-radius:11px;
+    background:#eee;
+    object-fit:cover;
+    display:grid;
+    place-items:center;
+    font-size:19px;
+    overflow:hidden;
+}
+
+.product-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.product b{
+    display:block;
+    font-size:11px;
+}
+
+.product span{
+    color:#999;
+    font-size:9px;
+}
+
+.status{
+    display:inline-block;
+    padding:6px 9px;
+    border-radius:8px;
+    font-size:8px;
+}
+
+.in-stock{
+    background:#eaf8ef;
+    color:#218448;
+}
+
+.low-stock{
+    background:#fff6df;
+    color:#a06b00;
+}
+
+.out-stock{
+    background:#ffecec;
+    color:#c03939;
+}
+
+.actions{
+    display:flex;
+    gap:5px;
+}
+
+.action{
+    width:30px;
+    height:30px;
+    border:0;
+    border-radius:8px;
+    background:#f3f3f5;
+}
+
+.delete{
+    color:#d33;
+}
+
+/* Modal */
+
+.modal-bg{
+    position:fixed;
+    inset:0;
+    background:#0008;
+    backdrop-filter:blur(5px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:5000;
+    padding:15px;
+}
+
+.modal-bg.show{
+    display:flex;
+}
+
+.modal{
+    width:520px;
+    max-width:100%;
+    max-height:90vh;
+    overflow:auto;
+    background:#fff;
+    border-radius:22px;
+    padding:25px;
+    box-shadow:0 30px 100px #0005;
+}
+
+.modal-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+
+.modal-head h2{
+    font-size:19px;
+}
+
+.close{
+    width:34px;
+    height:34px;
+    border:0;
+    border-radius:50%;
+    background:#f2f2f2;
+    font-size:18px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.field{
+    margin-bottom:13px;
+}
+
+.field.full{
+    grid-column:1/-1;
+}
+
+.field label{
+    display:block;
+    font-size:10px;
+    color:#777;
+    margin-bottom:6px;
+}
+
+.field input,
+.field select,
+.field textarea{
+    width:100%;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:10px;
+    outline:0;
+    font-size:11px;
+}
+
+.field textarea{
+    min-height:80px;
+    resize:vertical;
+}
+
+.save{
+    width:100%;
+    border:0;
+    background:#111;
+    color:#fff;
+    padding:13px;
+    border-radius:11px;
+    font-size:11px;
+    font-weight:700;
+    margin-top:5px;
+}
+
+/* Mobile */
+
+@media(max-width:1000px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:850px){
+
+    .sidebar{
+        transform:translateX(-100%);
+        transition:.3s;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .menu{
+        display:block;
+    }
+
+    .content{
+        padding:20px;
+    }
+
+    .table-card{
+        overflow-x:auto;
+    }
+
+    table{
+        min-width:750px;
+    }
+}
+
+@media(max-width:600px){
+
+    .header{
+        padding:0 15px;
+    }
+
+    .search{
+        display:none;
+    }
+
+    .page-head{
+        align-items:flex-start;
+    }
+
+    .page-head h1{
+        font-size:22px;
+    }
+
+    .stats{
+        gap:9px;
+    }
+
+    .stat{
+        padding:13px;
+    }
+
+    .stat h2{
+        font-size:20px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .field.full{
+        grid-column:auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="logo">
+        <div class="logo-icon">O</div>
+
+        <div class="logo-text">
+            OneEvan AI
+            <small>BUSINESS CENTER</small>
+        </div>
+    </div>
+
+    <div class="nav-title">Main</div>
+
+    <div class="nav-item" onclick="go('dashboard.html')">
+        <span class="nav-icon">📊</span>
+        Dashboard
+    </div>
+
+    <div class="nav-item active">
+        <span class="nav-icon">🛍️</span>
+        Products
+    </div>
+
+    <div class="nav-item" onclick="go('orders.html')">
+        <span class="nav-icon">📦</span>
+        Orders
+    </div>
+
+    <div class="nav-item" onclick="go('customers.html')">
+        <span class="nav-icon">👥</span>
+        Customers
+    </div>
+
+    <br>
+
+    <div class="nav-title">AI & Channels</div>
+
+    <div class="nav-item">
+        <span class="nav-icon">🧠</span>
+        AI Knowledge
+    </div>
+
+    <div class="nav-item">
+        <span class="nav-icon">🌐</span>
+        Website
+    </div>
+
+    <div class="nav-item">
+        <span class="nav-icon">📘</span>
+        Facebook
+    </div>
+
+    <div class="nav-item">
+        <span class="nav-icon">🟢</span>
+        WhatsApp
+    </div>
+
+    <br>
+
+    <div class="nav-title">System</div>
+
+    <div class="nav-item">
+        <span class="nav-icon">📈</span>
+        Analytics
+    </div>
+
+    <div class="nav-item">
+        <span class="nav-icon">⚙️</span>
+        Settings
+    </div>
+
+    <div class="sidebar-bottom">
+        <div class="nav-item" onclick="go('index.html')">
+            <span class="nav-icon">🚪</span>
+            Logout
+        </div>
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+<header class="header">
+
+    <div class="header-left">
+
+        <button class="menu" onclick="toggleMenu()">☰</button>
+
+        <div class="search">
+            🔍
+            <input
+                id="searchInput"
+                placeholder="Search products..."
+                oninput="renderProducts()"
+            >
+        </div>
+
+    </div>
+
+    <div class="header-right">
+
+        <button class="header-btn">🔔</button>
+
+        <button class="header-btn">🌙</button>
+
+        <div class="admin">
+
+            <div class="avatar">A</div>
+
+            <div>
+                <b style="font-size:10px;display:block;">Admin</b>
+                <span style="color:#999;font-size:8px;">Owner</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<section class="content">
+
+    <div class="page-head">
+
+        <div>
+            <h1>Products</h1>
+
+            <p>
+                Manage your OneEvan products,
+                prices, stock and information.
+            </p>
+        </div>
+
+        <button class="primary" onclick="openAdd()">
+            + Add Product
+        </button>
+
+    </div>
+
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+        <div class="stat">
+            <small>Total Products</small>
+            <h2 id="totalProducts">0</h2>
+        </div>
+
+        <div class="stat">
+            <small>In Stock</small>
+            <h2 id="inStock">0</h2>
+        </div>
+
+        <div class="stat">
+            <small>Low Stock</small>
+            <h2 id="lowStock">0</h2>
+        </div>
+
+        <div class="stat">
+            <small>Out of Stock</small>
+            <h2 id="outStock">0</h2>
+        </div>
+
+    </div>
+
+
+    <!-- TOOLBAR -->
+
+    <div class="toolbar">
+
+        <input
+            id="searchInput2"
+            placeholder="Search by product name..."
+            oninput="syncSearch(this.value)"
+        >
+
+        <select id="stockFilter" onchange="renderProducts()">
+            <option value="all">All Stock</option>
+            <option value="in">In Stock</option>
+            <option value="low">Low Stock</option>
+            <option value="out">Out of Stock</option>
+        </select>
+
+    </div>
+
+
+    <!-- TABLE -->
+
+    <div class="table-card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Sizes</th>
+                    <th>Stock</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="productTable"></tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- MODAL -->
+
+<div class="modal-bg" id="modal">
+
+    <div class="modal">
+
+        <div class="modal-head">
+
+            <h2 id="modalTitle">
+                Add Product
+            </h2>
+
+            <button class="close" onclick="closeModal()">
+                ×
+            </button>
+
+        </div>
+
+
+        <form onsubmit="saveProduct(event)">
+
+            <input type="hidden" id="editId">
+
+
+            <div class="form-grid">
+
+                <div class="field full">
+
+                    <label>Product Name</label>
+
+                    <input
+                        id="name"
+                        required
+                        placeholder="TIME IS MONEY T-Shirt"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>Price</label>
+
+                    <input
+                        id="price"
+                        required
+                        placeholder="1999"
+                        type="number"
+                        min="0"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>Stock Quantity</label>
+
+                    <input
+                        id="stock"
+                        required
+                        placeholder="50"
+                        type="number"
+                        min="0"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>Sizes</label>
+
+                    <input
+                        id="sizes"
+                        placeholder="M, L, XL"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>Colors</label>
+
+                    <input
+                        id="colors"
+                        placeholder="Black, White"
+                    >
+
+                </div>
+
+
+                <div class="field full">
+
+                    <label>Material</label>
+
+                    <input
+                        id="material"
+                        placeholder="Premium Cotton"
+                    >
+
+                </div>
+
+
+                <div class="field full">
+
+                    <label>Image URL</label>
+
+                    <input
+                        id="image"
+                        placeholder="https://..."
+                    >
+
+                </div>
+
+
+                <div class="field full">
+
+                    <label>Description</label>
+
+                    <textarea
+                        id="description"
+                        placeholder="Write product description..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+            <button class="save" type="submit">
+                Save Product
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const defaultProducts = [
+
+    {
+        id:1,
+        name:"TIME IS MONEY T-Shirt",
+        price:1999,
+        stock:25,
+        sizes:"M, L, XL",
+        colors:"Black",
+        material:"Premium Cotton",
+        image:"",
+        description:"Premium HD Print cotton T-shirt."
+    },
+
+    {
+        id:2,
+        name:"Premium Oversized T-Shirt",
+        price:1799,
+        stock:8,
+        sizes:"M, L, XL, XXL",
+        colors:"Black, White",
+        material:"100% Cotton",
+        image:"",
+        description:"Premium oversized fit."
+    },
+
+    {
+        id:3,
+        name:"OneEvan Premium Hoodie",
+        price:2499,
+        stock:0,
+        sizes:"M, L, XL, XXL",
+        colors:"Black",
+        material:"Premium Fleece",
+        image:"",
+        description:"Soft fleece premium hoodie."
+    }
+
+];
+
+
+let products =
+JSON.parse(
+    localStorage.getItem("oneevan_products")
+) || defaultProducts;
+
+
+function saveData(){
+
+    localStorage.setItem(
+        "oneevan_products",
+        JSON.stringify(products)
+    );
+
+}
+
+
+function getStatus(stock){
+
+    stock=Number(stock);
+
+    if(stock<=0){
+
+        return {
+            text:"Out of Stock",
+            class:"out-stock"
+        };
+
+    }
+
+    if(stock<=10){
+
+        return {
+            text:"Low Stock",
+            class:"low-stock"
+        };
+
+    }
+
+    return {
+        text:"In Stock",
+        class:"in-stock"
+    };
+
+}
+
+
+function renderProducts(){
+
+    const search =
+        (
+            document.getElementById("searchInput").value ||
+            document.getElementById("searchInput2").value
+        ).toLowerCase();
+
+    const filter =
+        document.getElementById("stockFilter").value;
+
+
+    let list =
+    products.filter(p=>{
+
+        const match =
+        p.name.toLowerCase().includes(search);
+
+        const status =
+        getStatus(p.stock);
+
+        if(filter==="in" &&
+            status.class!=="in-stock")
+            return false;
+
+        if(filter==="low" &&
+            status.class!=="low-stock")
+            return false;
+
+        if(filter==="out" &&
+            status.class!=="out-stock")
+            return false;
+
+        return match;
+
+    });
+
+
+    const table =
+    document.getElementById("productTable");
+
+
+    table.innerHTML="";
+
+
+    list.forEach(p=>{
+
+        const status =
+        getStatus(p.stock);
+
+
+        const imageHTML =
+        p.image
+        ?
+        `<img src="${escapeHTML(p.image)}">`
+        :
+        "👕";
+
+
+        table.innerHTML += `
+
+        <tr>
+
+            <td>
+
+                <div class="product">
+
+                    <div class="product-img">
+                        ${imageHTML}
+                    </div>
+
+                    <div>
+
+                        <b>
+                            ${escapeHTML(p.name)}
+                        </b>
+
+                        <span>
+                            ${escapeHTML(p.material || "")}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </td>
+
+
+            <td>
+                ৳${Number(p.price).toLocaleString()}
+            </td>
+
+
+            <td>
+                ${escapeHTML(p.sizes || "-")}
+            </td>
+
+
+            <td>
+                ${p.stock}
+            </td>
+
+
+            <td>
+
+                <span
+                class="status ${status.class}">
+
+                    ${status.text}
+
+                </span>
+
+            </td>
+
+
+            <td>
+
+                <div class="actions">
+
+                    <button
+                    class="action"
+                    onclick="editProduct(${p.id})">
+
+                        ✏️
+
+                    </button>
+
+
+                    <button
+                    class="action delete"
+                    onclick="deleteProduct(${p.id})">
+
+                        🗑️
+
+                    </button>
+
+                </div>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+
+    updateStats();
+
+}
+
+
+function updateStats(){
+
+    document.getElementById("totalProducts").textContent =
+        products.length;
+
+    document.getElementById("inStock").textContent =
+        products.filter(p=>Number(p.stock)>10).length;
+
+    document.getElementById("lowStock").textContent =
+        products.filter(p=>Number(p.stock)>0 && Number(p.stock)<=10).length;
+
+    document.getElementById("outStock").textContent =
+        products.filter(p=>Number(p.stock)<=0).length;
+
+}
+
+
+function openAdd(){
+
+    document.getElementById("modalTitle").textContent =
+        "Add Product";
+
+    document.getElementById("editId").value="";
+
+    document.getElementById("name").value="";
+    document.getElementById("price").value="";
+    document.getElementById("stock").value="";
+    document.getElementById("sizes").value="";
+    document.getElementById("colors").value="";
+    document.getElementById("material").value="";
+    document.getElementById("image").value="";
+    document.getElementById("description").value="";
+
+    document
+    .getElementById("modal")
+    .classList.add("show");
+
+}
+
+
+function editProduct(id){
+
+    const p =
+    products.find(x=>x.id===id);
+
+    if(!p) return;
+
+
+    document.getElementById("modalTitle").textContent =
+        "Edit Product";
+
+    document.getElementById("editId").value =
+        p.id;
+
+    document.getElementById("name").value =
+        p.name;
+
+    document.getElementById("price").value =
+        p.price;
+
+    document.getElementById("stock").value =
+        p.stock;
+
+    document.getElementById("sizes").value =
+        p.sizes || "";
+
+    document.getElementById("colors").value =
+        p.colors || "";
+
+    document.getElementById("material").value =
+        p.material || "";
+
+    document.getElementById("image").value =
+        p.image || "";
+
+    document.getElementById("description").value =
+        p.description || "";
+
+
+    document
+    .getElementById("modal")
+    .classList.add("show");
+
+}
+
+
+function closeModal(){
+
+    document
+    .getElementById("modal")
+    .classList.remove("show");
+
+}
+
+
+function saveProduct(event){
+
+    event.preventDefault();
+
+
+    const id =
+        document.getElementById("editId").value;
+
+
+    const product={
+
+        id:
+        id
+        ?
+        Number(id)
+        :
+        Date.now(),
+
+        name:
+        document.getElementById("name").value.trim(),
+
+        price:
+        Number(
+            document.getElementById("price").value
+        ),
+
+        stock:
+        Number(
+            document.getElementById("stock").value
+        ),
+
+        sizes:
+        document.getElementById("sizes").value.trim(),
+
+        colors:
+        document.getElementById("colors").value.trim(),
+
+        material:
+        document.getElementById("material").value.trim(),
+
+        image:
+        document.getElementById("image").value.trim(),
+
+        description:
+        document.getElementById("description").value.trim()
+
+    };
+
+
+    if(id){
+
+        const index =
+        products.findIndex(
+            p=>p.id===Number(id)
+        );
+
+        products[index]=product;
+
+    }else{
+
+        products.unshift(product);
+
+    }
+
+
+    saveData();
+
+    renderProducts();
+
+    closeModal();
+
+}
+
+
+function deleteProduct(id){
+
+    const p =
+    products.find(x=>x.id===id);
+
+    if(!p) return;
+
+
+    if(
+        confirm(
+            `"${p.name}" delete করতে চান?`
+        )
+    ){
+
+        products =
+        products.filter(
+            x=>x.id!==id
+        );
+
+        saveData();
+
+        renderProducts();
+
+    }
+
+}
+
+
+function syncSearch(value){
+
+    document.getElementById("searchInput").value =
+        value;
+
+    renderProducts();
+
+}
+
+
+function escapeHTML(value){
+
+    return String(value)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
+}
+
+
+function toggleMenu(){
+
+    document
+    .getElementById("sidebar")
+    .classList.toggle("open");
+
+}
+
+
+function go(page){
+
+    window.location.href=page;
+
+}
+
+
+renderProducts();
+
+</script>
+
+</body>
+</html>
