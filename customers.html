@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>OneEvan AI — Customers</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    background:#f5f5f7;
+    color:#111;
+}
+
+button,input,select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    width:250px;
+
+    background:#090909;
+    color:#fff;
+
+    padding:24px 15px;
+
+    z-index:1000;
+
+    transition:.3s;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:11px;
+
+    padding:0 10px 28px;
+
+    border-bottom:1px solid #ffffff12;
+
+    margin-bottom:20px;
+}
+
+.logo-icon{
+    width:40px;
+    height:40px;
+
+    border-radius:12px;
+
+    background:#fff;
+    color:#111;
+
+    display:grid;
+    place-items:center;
+
+    font-weight:800;
+}
+
+.logo-text{
+    font-size:15px;
+    font-weight:700;
+}
+
+.logo-text small{
+    display:block;
+
+    font-size:8px;
+    color:#777;
+
+    margin-top:3px;
+}
+
+.nav-title{
+    font-size:9px;
+    color:#666;
+
+    padding:0 11px 8px;
+
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.nav-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    width:100%;
+
+    padding:12px;
+
+    margin:3px 0;
+
+    border-radius:12px;
+
+    color:#999;
+
+    font-size:12px;
+
+    transition:.2s;
+}
+
+.nav-item:hover{
+    background:#ffffff08;
+    color:#fff;
+}
+
+.nav-item.active{
+    background:#fff;
+    color:#111;
+}
+
+.nav-icon{
+    width:20px;
+    text-align:center;
+}
+
+.sidebar-bottom{
+    position:absolute;
+
+    left:15px;
+    right:15px;
+    bottom:20px;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    margin-left:250px;
+    min-height:100vh;
+}
+
+
+/* HEADER */
+
+.header{
+    height:72px;
+
+    background:#fff;
+
+    border-bottom:1px solid #e8e8e8;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 30px;
+}
+
+.header-left{
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+}
+
+.menu{
+    display:none;
+
+    border:0;
+
+    background:#f2f2f2;
+
+    width:38px;
+    height:38px;
+
+    border-radius:10px;
+}
+
+.search{
+    width:270px;
+    height:38px;
+
+    background:#f5f5f7;
+
+    border-radius:10px;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:0 12px;
+
+    color:#999;
+
+    font-size:11px;
+}
+
+.search input{
+    width:100%;
+
+    border:0;
+    outline:0;
+
+    background:transparent;
+
+    margin-left:8px;
+}
+
+.header-right{
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.header-btn{
+    width:38px;
+    height:38px;
+
+    border:0;
+
+    border-radius:10px;
+
+    background:#f5f5f7;
+}
+
+.admin{
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    padding-left:8px;
+}
+
+.avatar{
+    width:35px;
+    height:35px;
+
+    border-radius:50%;
+
+    background:#111;
+    color:#fff;
+
+    display:grid;
+    place-items:center;
+
+    font-size:11px;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+    padding:30px;
+}
+
+.page-head{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:25px;
+}
+
+.page-head h1{
+    font-size:27px;
+
+    letter-spacing:-.7px;
+}
+
+.page-head p{
+    color:#888;
+
+    font-size:12px;
+
+    margin-top:5px;
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:15px;
+
+    margin-bottom:20px;
+}
+
+.stat{
+    background:#fff;
+
+    border:1px solid #e9e9e9;
+
+    border-radius:16px;
+
+    padding:18px;
+}
+
+.stat-top{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+}
+
+.stat-icon{
+    width:38px;
+    height:38px;
+
+    border-radius:11px;
+
+    background:#f2f2f2;
+
+    display:grid;
+
+    place-items:center;
+}
+
+.stat small{
+    color:#888;
+
+    font-size:10px;
+}
+
+.stat h2{
+    font-size:23px;
+
+    margin-top:10px;
+}
+
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.toolbar{
+    background:#fff;
+
+    border:1px solid #e9e9e9;
+
+    border-radius:16px;
+
+    padding:14px;
+
+    display:flex;
+
+    gap:10px;
+
+    margin-bottom:15px;
+}
+
+.toolbar input,
+.toolbar select{
+    height:40px;
+
+    border:1px solid #e2e2e2;
+
+    border-radius:10px;
+
+    padding:0 12px;
+
+    outline:0;
+
+    font-size:11px;
+
+    background:#fff;
+}
+
+.toolbar input{
+    flex:1;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.table-card{
+    background:#fff;
+
+    border:1px solid #e9e9e9;
+
+    border-radius:17px;
+
+    overflow:hidden;
+}
+
+table{
+    width:100%;
+
+    border-collapse:collapse;
+}
+
+th{
+    background:#fafafa;
+
+    color:#888;
+
+    font-size:9px;
+
+    text-align:left;
+
+    padding:14px;
+
+    text-transform:uppercase;
+}
+
+td{
+    padding:14px;
+
+    border-top:1px solid #f0f0f0;
+
+    font-size:10px;
+}
+
+.customer{
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.customer-avatar{
+    width:40px;
+    height:40px;
+
+    border-radius:50%;
+
+    background:#111;
+
+    color:#fff;
+
+    display:grid;
+
+    place-items:center;
+
+    font-size:11px;
+}
+
+.customer-info b{
+    display:block;
+
+    font-size:10px;
+}
+
+.customer-info span{
+    display:block;
+
+    color:#999;
+
+    font-size:8px;
+
+    margin-top:3px;
+}
+
+.amount{
+    font-weight:700;
+}
+
+.orders-count{
+    display:inline-block;
+
+    padding:5px 8px;
+
+    border-radius:8px;
+
+    background:#f1f1f3;
+
+    font-size:8px;
+}
+
+.customer-status{
+    display:inline-block;
+
+    padding:6px 9px;
+
+    border-radius:8px;
+
+    font-size:8px;
+}
+
+.active-status{
+    background:#eaf8ef;
+
+    color:#218448;
+}
+
+.inactive-status{
+    background:#f1f1f3;
+
+    color:#888;
+}
+
+.action{
+    width:31px;
+    height:31px;
+
+    border:0;
+
+    border-radius:8px;
+
+    background:#f2f2f4;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal-bg{
+    position:fixed;
+
+    inset:0;
+
+    background:#0008;
+
+    backdrop-filter:blur(6px);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:5000;
+
+    padding:15px;
+}
+
+.modal-bg.show{
+    display:flex;
+}
+
+.modal{
+    width:570px;
+
+    max-width:100%;
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:25px;
+}
+
+.modal-head{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:22px;
+}
+
+.modal-head h2{
+    font-size:19px;
+}
+
+.close{
+    width:34px;
+    height:34px;
+
+    border:0;
+
+    border-radius:50%;
+
+    background:#f2f2f2;
+
+    font-size:18px;
+}
+
+.profile{
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:15px;
+
+    background:#f7f7f8;
+
+    border-radius:15px;
+
+    margin-bottom:15px;
+}
+
+.profile-avatar{
+    width:52px;
+    height:52px;
+
+    border-radius:50%;
+
+    background:#111;
+
+    color:#fff;
+
+    display:grid;
+
+    place-items:center;
+
+    font-size:14px;
+}
+
+.profile-info b{
+    font-size:14px;
+
+    display:block;
+}
+
+.profile-info span{
+    color:#888;
+
+    font-size:9px;
+}
+
+.details{
+    display:grid;
+
+    grid-template-columns:
+    1fr 1fr;
+
+    gap:10px;
+}
+
+.detail{
+    background:#f7f7f8;
+
+    border-radius:12px;
+
+    padding:13px;
+}
+
+.detail.full{
+    grid-column:1/-1;
+}
+
+.detail small{
+    color:#888;
+
+    font-size:9px;
+}
+
+.detail b{
+    display:block;
+
+    font-size:11px;
+
+    margin-top:5px;
+}
+
+.close-modal{
+    width:100%;
+
+    border:0;
+
+    background:#111;
+
+    color:#fff;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    margin-top:15px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1050px){
+
+    .stats{
+        grid-template-columns:
+        repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:850px){
+
+    .sidebar{
+        transform:translateX(-100%);
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .menu{
+        display:block;
+    }
+
+    .table-card{
+        overflow-x:auto;
+    }
+
+    table{
+        min-width:850px;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .content{
+        padding:18px;
+    }
+
+    .header{
+        padding:0 15px;
+    }
+
+    .search{
+        display:none;
+    }
+
+    .page-head h1{
+        font-size:22px;
+    }
+
+    .stats{
+        gap:9px;
+    }
+
+    .stat{
+        padding:13px;
+    }
+
+    .stat h2{
+        font-size:19px;
+    }
+
+    .details{
+        grid-template-columns:1fr;
+    }
+
+    .detail.full{
+        grid-column:auto;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="sidebar" id="sidebar">
+
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            O
+        </div>
+
+        <div class="logo-text">
+
+            OneEvan AI
+
+            <small>
+                BUSINESS CENTER
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="nav-title">
+        Main
+    </div>
+
+
+    <div
+        class="nav-item"
+        onclick="go('dashboard.html')">
+
+        <span class="nav-icon">
+            📊
+        </span>
+
+        Dashboard
+
+    </div>
+
+
+    <div
+        class="nav-item"
+        onclick="go('products.html')">
+
+        <span class="nav-icon">
+            🛍️
+        </span>
+
+        Products
+
+    </div>
+
+
+    <div
+        class="nav-item"
+        onclick="go('orders.html')">
+
+        <span class="nav-icon">
+            📦
+        </span>
+
+        Orders
+
+    </div>
+
+
+    <div class="nav-item active">
+
+        <span class="nav-icon">
+            👥
+        </span>
+
+        Customers
+
+    </div>
+
+
+    <br>
+
+
+    <div class="nav-title">
+        AI & Channels
+    </div>
+
+
+    <div class="nav-item">
+
+        <span class="nav-icon">
+            🧠
+        </span>
+
+        AI Knowledge
+
+    </div>
+
+
+    <div class="nav-item">
+
+        <span class="nav-icon">
+            🌐
+        </span>
+
+        Website
+
+    </div>
+
+
+    <div class="nav-item">
+
+        <span class="nav-icon">
+            📘
+        </span>
+
+        Facebook
+
+    </div>
+
+
+    <div class="nav-item">
+
+        <span class="nav-icon">
+            🟢
+        </span>
+
+        WhatsApp
+
+    </div>
+
+
+    <br>
+
+
+    <div class="nav-title">
+        System
+    </div>
+
+
+    <div class="nav-item">
+
+        <span class="nav-icon">
+            📈
+        </span>
+
+        Analytics
+
+    </div>
+
+
+    <div class="nav-item">
+
+        <span class="nav-icon">
+            ⚙️
+        </span>
+
+        Settings
+
+    </div>
+
+
+    <div class="sidebar-bottom">
+
+        <div
+            class="nav-item"
+            onclick="go('index.html')">
+
+            <span class="nav-icon">
+                🚪
+            </span>
+
+            Logout
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+
+    <header class="header">
+
+
+        <div class="header-left">
+
+
+            <button
+                class="menu"
+                onclick="toggleMenu()">
+
+                ☰
+
+            </button>
+
+
+            <div class="search">
+
+                🔍
+
+                <input
+                    id="search"
+                    placeholder="Search customers..."
+                    oninput="renderCustomers()"
+                >
+
+            </div>
+
+
+        </div>
+
+
+        <div class="header-right">
+
+
+            <button class="header-btn">
+                🔔
+            </button>
+
+
+            <button class="header-btn">
+                🌙
+            </button>
+
+
+            <div class="admin">
+
+                <div class="avatar">
+                    A
+                </div>
+
+                <div>
+
+                    <b
+                        style="
+                        font-size:10px;
+                        display:block;
+                        ">
+
+                        Admin
+
+                    </b>
+
+                    <span
+                        style="
+                        color:#999;
+                        font-size:8px;
+                        ">
+
+                        Owner
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </header>
+
+
+
+    <section class="content">
+
+
+        <div class="page-head">
+
+
+            <div>
+
+                <h1>
+                    Customers
+                </h1>
+
+                <p>
+                    Manage customer profiles,
+                    orders and spending.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- STATS -->
+
+        <div class="stats">
+
+
+            <div class="stat">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon">
+                        👥
+                    </div>
+
+                </div>
+
+                <small>
+                    Total Customers
+                </small>
+
+                <h2 id="totalCustomers">
+                    0
+                </h2>
+
+            </div>
+
+
+
+            <div class="stat">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon">
+                        🟢
+                    </div>
+
+                </div>
+
+                <small>
+                    Active Customers
+                </small>
+
+                <h2 id="activeCustomers">
+                    0
+                </h2>
+
+            </div>
+
+
+
+            <div class="stat">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon">
+                        🛒
+                    </div>
+
+                </div>
+
+                <small>
+                    Total Orders
+                </small>
+
+                <h2 id="totalOrders">
+                    0
+                </h2>
+
+            </div>
+
+
+
+            <div class="stat">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon">
+                        💰
+                    </div>
+
+                </div>
+
+                <small>
+                    Customer Revenue
+                </small>
+
+                <h2 id="totalRevenue">
+                    ৳0
+                </h2>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- TOOLBAR -->
+
+        <div class="toolbar">
+
+
+            <input
+                id="search2"
+                placeholder="Search by name, phone or email..."
+                oninput="syncSearch(this.value)"
+            >
+
+
+            <select
+                id="customerFilter"
+                onchange="renderCustomers()">
+
+                <option value="all">
+                    All Customers
+                </option>
+
+                <option value="active">
+                    Active
+                </option>
+
+                <option value="inactive">
+                    Inactive
+                </option>
+
+            </select>
+
+
+        </div>
+
+
+
+        <!-- TABLE -->
+
+        <div class="table-card">
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Customer
+                        </th>
+
+                        <th>
+                            Phone
+                        </th>
+
+                        <th>
+                            Orders
+                        </th>
+
+                        <th>
+                            Total Spent
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Joined
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody
+                    id="customerTable">
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =========================
+     CUSTOMER MODAL
+========================= -->
+
+<div
+    class="modal-bg"
+    id="modal">
+
+
+    <div class="modal">
+
+
+        <div class="modal-head">
+
+
+            <h2>
+                Customer Details
+            </h2>
+
+
+            <button
+                class="close"
+                onclick="closeModal()">
+
+                ×
+
+            </button>
+
+
+        </div>
+
+
+
+        <div class="profile">
+
+
+            <div
+                class="profile-avatar"
+                id="profileAvatar">
+
+                A
+
+            </div>
+
+
+            <div class="profile-info">
+
+
+                <b id="detailName">
+                    Customer
+                </b>
+
+
+                <span id="detailEmail">
+                    -
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="details">
+
+
+            <div class="detail">
+
+                <small>
+                    Phone
+                </small>
+
+                <b id="detailPhone">
+                    -
+                </b>
+
+            </div>
+
+
+            <div class="detail">
+
+                <small>
+                    Customer ID
+                </small>
+
+                <b id="detailId">
+                    -
+                </b>
+
+            </div>
+
+
+            <div class="detail full">
+
+                <small>
+                    Address
+                </small>
+
+                <b id="detailAddress">
+                    -
+                </b>
+
+            </div>
+
+
+            <div class="detail">
+
+                <small>
+                    Total Orders
+                </small>
+
+                <b id="detailOrders">
+                    0
+                </b>
+
+            </div>
+
+
+            <div class="detail">
+
+                <small>
+                    Total Spent
+                </small>
+
+                <b id="detailSpent">
+                    ৳0
+                </b>
+
+            </div>
+
+
+            <div class="detail">
+
+                <small>
+                    Joined
+                </small>
+
+                <b id="detailJoined">
+                    -
+                </b>
+
+            </div>
+
+
+            <div class="detail">
+
+                <small>
+                    Status
+                </small>
+
+                <b id="detailStatus">
+                    Active
+                </b>
+
+            </div>
+
+
+        </div>
+
+
+
+        <button
+            class="close-modal"
+            onclick="closeModal()">
+
+            Close Customer
+
+        </button>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =========================
+   DEMO CUSTOMERS
+========================= */
+
+const defaultCustomers = [
+
+    {
+        id:"CUS-001",
+        name:"Tanzeem Ahmed",
+        email:"tanzeem@example.com",
+        phone:"01700000000",
+        address:"Dhaka, Bangladesh",
+        orders:5,
+        spent:8995,
+        status:"Active",
+        joined:"10 Aug 2026"
+    },
+
+
+    {
+        id:"CUS-002",
+        name:"Rahim Hasan",
+        email:"rahim@example.com",
+        phone:"01800000000",
+        address:"Chittagong, Bangladesh",
+        orders:3,
+        spent:5797,
+        status:"Active",
+        joined:"12 Aug 2026"
+    },
+
+
+    {
+        id:"CUS-003",
+        name:"Sadia Akter",
+        email:"sadia@example.com",
+        phone:"01900000000",
+        address:"Sylhet, Bangladesh",
+        orders:7,
+        spent:13493,
+        status:"Active",
+        joined:"04 Aug 2026"
+    },
+
+
+    {
+        id:"CUS-004",
+        name:"Nayeem Islam",
+        email:"nayeem@example.com",
+        phone:"01600000000",
+        address:"Rajshahi, Bangladesh",
+        orders:1,
+        spent:1999,
+        status:"Inactive",
+        joined:"18 Aug 2026"
+    },
+
+
+    {
+        id:"CUS-005",
+        name:"Fahim Khan",
+        email:"fahim@example.com",
+        phone:"01500000000",
+        address:"Khulna, Bangladesh",
+        orders:4,
+        spent:9996,
+        status:"Active",
+        joined:"06 Aug 2026"
+    }
+
+];
+
+
+let customers =
+
+JSON.parse(
+    localStorage.getItem(
+        "oneevan_customers"
+    )
+)
+
+|| defaultCustomers;
+
+
+/* =========================
+   SAVE
+========================= */
+
+function saveCustomers(){
+
+    localStorage.setItem(
+        "oneevan_customers",
+        JSON.stringify(customers)
+    );
+
+}
+
+
+/* =========================
+   RENDER
+========================= */
+
+function renderCustomers(){
+
+
+    const search =
+
+    document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+
+    const filter =
+
+    document
+        .getElementById("customerFilter")
+        .value;
+
+
+    const list =
+
+    customers.filter(customer=>{
+
+
+        const text =
+
+        (
+            customer.name+
+            " "+
+            customer.email+
+            " "+
+            customer.phone
+        )
+        .toLowerCase();
+
+
+        const matchesSearch =
+
+        text.includes(search);
+
+
+        const matchesFilter =
+
+        filter==="all" ||
+
+        (
+            filter==="active" &&
+            customer.status==="Active"
+        ) ||
+
+        (
+            filter==="inactive" &&
+            customer.status==="Inactive"
+        );
+
+
+        return (
+            matchesSearch &&
+            matchesFilter
+        );
+
+    });
+
+
+    const table =
+
+    document.getElementById(
+        "customerTable"
+    );
+
+
+    table.innerHTML="";
+
+
+    list.forEach(customer=>{
+
+
+        const firstLetter =
+
+        customer.name
+        .charAt(0)
+        .toUpperCase();
+
+
+        const statusClass =
+
+        customer.status==="Active"
+
+        ?
+
+        "active-status"
+
+        :
+
+        "inactive-status";
+
+
+        table.innerHTML += `
+
+        <tr>
+
+
+            <td>
+
+
+                <div class="customer">
+
+
+                    <div class="customer-avatar">
+
+                        ${firstLetter}
+
+                    </div>
+
+
+                    <div class="customer-info">
+
+
+                        <b>
+
+                            ${escapeHTML(
+                                customer.name
+                            )}
+
+                        </b>
+
+
+                        <span>
+
+                            ${escapeHTML(
+                                customer.email
+                            )}
+
+                        </span>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </td>
+
+
+            <td>
+
+                ${escapeHTML(
+                    customer.phone
+                )}
+
+            </td>
+
+
+            <td>
+
+                <span class="orders-count">
+
+                    ${customer.orders}
+
+                    orders
+
+                </span>
+
+            </td>
+
+
+            <td>
+
+                <span class="amount">
+
+                    ৳${Number(
+                        customer.spent
+                    ).toLocaleString()}
+
+                </span>
+
+            </td>
+
+
+            <td>
+
+                <span
+                    class="customer-status
+                    ${statusClass}">
+
+                    ${customer.status}
+
+                </span>
+
+            </td>
+
+
+            <td>
+
+                ${escapeHTML(
+                    customer.joined
+                )}
+
+            </td>
+
+
+            <td>
+
+                <button
+                    class="action"
+                    onclick="openCustomer(
+                        '${customer.id}'
+                    )">
+
+                    👁️
+
+                </button>
+
+            </td>
+
+
+        </tr>
+
+        `;
+
+    });
+
+
+    updateStats();
+
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+function updateStats(){
+
+
+    document
+        .getElementById(
+            "totalCustomers"
+        )
+        .textContent =
+        customers.length;
+
+
+    document
+        .getElementById(
+            "activeCustomers"
+        )
+        .textContent =
+
+        customers.filter(
+            c=>c.status==="Active"
+        ).length;
+
+
+    document
+        .getElementById(
+            "totalOrders"
+        )
+        .textContent =
+
+        customers.reduce(
+            (sum,c)=>
+            sum+
+            Number(c.orders),
+            0
+        );
+
+
+    const revenue =
+
+    customers.reduce(
+        (sum,c)=>
+        sum+
+        Number(c.spent),
+        0
+    );
+
+
+    document
+        .getElementById(
+            "totalRevenue"
+        )
+        .textContent =
+
+        "৳"+
+        revenue.toLocaleString();
+
+}
+
+
+/* =========================
+   OPEN CUSTOMER
+========================= */
+
+function openCustomer(id){
+
+
+    const customer =
+
+    customers.find(
+        c=>c.id===id
+    );
+
+
+    if(!customer)
+        return;
+
+
+    const letter =
+
+    customer.name
+    .charAt(0)
+    .toUpperCase();
+
+
+    document
+        .getElementById(
+            "profileAvatar"
+        )
+        .textContent =
+        letter;
+
+
+    document
+        .getElementById(
+            "detailName"
+        )
+        .textContent =
+        customer.name;
+
+
+    document
+        .getElementById(
+            "detailEmail"
+        )
+        .textContent =
+        customer.email;
+
+
+    document
+        .getElementById(
+            "detailPhone"
+        )
+        .textContent =
+        customer.phone;
+
+
+    document
+        .getElementById(
+            "detailId"
+        )
+        .textContent =
+        customer.id;
+
+
+    document
+        .getElementById(
+            "detailAddress"
+        )
+        .textContent =
+        customer.address;
+
+
+    document
+        .getElementById(
+            "detailOrders"
+        )
+        .textContent =
+        customer.orders;
+
+
+    document
+        .getElementById(
+            "detailSpent"
+        )
+        .textContent =
+        "৳"+
+        Number(
+            customer.spent
+        ).toLocaleString();
+
+
+    document
+        .getElementById(
+            "detailJoined"
+        )
+        .textContent =
+        customer.joined;
+
+
+    document
+        .getElementById(
+            "detailStatus"
+        )
+        .textContent =
+        customer.status;
+
+
+    document
+        .getElementById(
+            "modal"
+        )
+        .classList
+        .add("show");
+
+}
+
+
+/* =========================
+   CLOSE
+========================= */
+
+function closeModal(){
+
+    document
+        .getElementById(
+            "modal"
+        )
+        .classList
+        .remove("show");
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function syncSearch(value){
+
+    document
+        .getElementById(
+            "search"
+        )
+        .value =
+        value;
+
+    renderCustomers();
+
+}
+
+
+/* =========================
+   MENU
+========================= */
+
+function toggleMenu(){
+
+    document
+        .getElementById(
+            "sidebar"
+        )
+        .classList
+        .toggle("open");
+
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function go(page){
+
+    window.location.href =
+        page;
+
+}
+
+
+/* =========================
+   SECURITY
+========================= */
+
+function escapeHTML(value){
+
+    return String(value)
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+/* START */
+
+renderCustomers();
+
+</script>
+
+</body>
+</html>
