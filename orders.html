@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>OneEvan AI — Orders</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    background:#f5f5f7;
+    color:#111;
+}
+
+button,input,select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    width:250px;
+    background:#090909;
+    color:#fff;
+    padding:24px 15px;
+    z-index:1000;
+    transition:.3s;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:0 10px 28px;
+    border-bottom:1px solid #ffffff12;
+    margin-bottom:20px;
+}
+
+.logo-icon{
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    background:#fff;
+    color:#111;
+    display:grid;
+    place-items:center;
+    font-weight:800;
+}
+
+.logo-text{
+    font-size:15px;
+    font-weight:700;
+}
+
+.logo-text small{
+    display:block;
+    font-size:8px;
+    color:#777;
+    margin-top:3px;
+}
+
+.nav-title{
+    font-size:9px;
+    color:#666;
+    padding:0 11px 8px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.nav-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    width:100%;
+    padding:12px;
+    margin:3px 0;
+    border-radius:12px;
+    color:#999;
+    font-size:12px;
+    transition:.2s;
+}
+
+.nav-item:hover{
+    background:#ffffff08;
+    color:#fff;
+}
+
+.nav-item.active{
+    background:#fff;
+    color:#111;
+}
+
+.nav-icon{
+    width:20px;
+    text-align:center;
+}
+
+.sidebar-bottom{
+    position:absolute;
+    left:15px;
+    right:15px;
+    bottom:20px;
+}
+
+/* MAIN */
+
+.main{
+    margin-left:250px;
+    min-height:100vh;
+}
+
+.header{
+    height:72px;
+    background:#fff;
+    border-bottom:1px solid #e8e8e8;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 30px;
+}
+
+.header-left{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.menu{
+    display:none;
+    border:0;
+    background:#f2f2f2;
+    width:38px;
+    height:38px;
+    border-radius:10px;
+}
+
+.search{
+    width:270px;
+    height:38px;
+    background:#f5f5f7;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    padding:0 12px;
+    color:#999;
+    font-size:11px;
+}
+
+.search input{
+    width:100%;
+    border:0;
+    outline:0;
+    background:transparent;
+    margin-left:8px;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.header-btn{
+    width:38px;
+    height:38px;
+    border:0;
+    border-radius:10px;
+    background:#f5f5f7;
+}
+
+.admin{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    padding-left:8px;
+}
+
+.avatar{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    background:#111;
+    color:#fff;
+    display:grid;
+    place-items:center;
+    font-size:11px;
+}
+
+/* CONTENT */
+
+.content{
+    padding:30px;
+}
+
+.page-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:25px;
+}
+
+.page-head h1{
+    font-size:27px;
+    letter-spacing:-.7px;
+}
+
+.page-head p{
+    color:#888;
+    font-size:12px;
+    margin-top:5px;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.stat{
+    background:#fff;
+    border:1px solid #e9e9e9;
+    border-radius:16px;
+    padding:18px;
+}
+
+.stat-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.stat-icon{
+    width:38px;
+    height:38px;
+    border-radius:11px;
+    background:#f2f2f2;
+    display:grid;
+    place-items:center;
+}
+
+.stat small{
+    color:#888;
+    font-size:10px;
+}
+
+.stat h2{
+    font-size:23px;
+    margin-top:10px;
+}
+
+/* TOOLBAR */
+
+.toolbar{
+    background:#fff;
+    border:1px solid #e9e9e9;
+    border-radius:16px;
+    padding:14px;
+    display:flex;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.toolbar input,
+.toolbar select{
+    height:40px;
+    border:1px solid #e2e2e2;
+    border-radius:10px;
+    padding:0 12px;
+    outline:0;
+    font-size:11px;
+    background:#fff;
+}
+
+.toolbar input{
+    flex:1;
+}
+
+/* TABLE */
+
+.table-card{
+    background:#fff;
+    border:1px solid #e9e9e9;
+    border-radius:17px;
+    overflow:hidden;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#fafafa;
+    color:#888;
+    font-size:9px;
+    text-align:left;
+    padding:14px;
+    text-transform:uppercase;
+}
+
+td{
+    padding:14px;
+    border-top:1px solid #f0f0f0;
+    font-size:10px;
+}
+
+.order-id{
+    font-weight:700;
+    font-size:10px;
+}
+
+.customer{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.customer-avatar{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:#eee;
+    display:grid;
+    place-items:center;
+}
+
+.customer-info b{
+    display:block;
+    font-size:10px;
+}
+
+.customer-info span{
+    color:#999;
+    font-size:8px;
+}
+
+.amount{
+    font-weight:700;
+}
+
+.badge{
+    display:inline-block;
+    padding:6px 9px;
+    border-radius:8px;
+    font-size:8px;
+}
+
+.pending{
+    background:#fff5dc;
+    color:#a36d00;
+}
+
+.confirmed{
+    background:#eaf2ff;
+    color:#3867b0;
+}
+
+.processing{
+    background:#f0eaff;
+    color:#6744a8;
+}
+
+.shipped{
+    background:#e9f8ef;
+    color:#238448;
+}
+
+.delivered{
+    background:#dff7e8;
+    color:#13733c;
+}
+
+.cancelled{
+    background:#ffe9e9;
+    color:#c23838;
+}
+
+.action{
+    width:31px;
+    height:31px;
+    border:0;
+    border-radius:8px;
+    background:#f2f2f4;
+}
+
+/* MODAL */
+
+.modal-bg{
+    position:fixed;
+    inset:0;
+    background:#0008;
+    backdrop-filter:blur(6px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:5000;
+    padding:15px;
+}
+
+.modal-bg.show{
+    display:flex;
+}
+
+.modal{
+    width:560px;
+    max-width:100%;
+    max-height:90vh;
+    overflow:auto;
+    background:#fff;
+    border-radius:22px;
+    padding:25px;
+}
+
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:22px;
+}
+
+.modal-head h2{
+    font-size:19px;
+}
+
+.close{
+    width:34px;
+    height:34px;
+    border:0;
+    border-radius:50%;
+    background:#f2f2f2;
+    font-size:18px;
+}
+
+.detail{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.detail-box{
+    background:#f7f7f8;
+    border-radius:12px;
+    padding:13px;
+}
+
+.detail-box.full{
+    grid-column:1/-1;
+}
+
+.detail-box small{
+    color:#888;
+    font-size:9px;
+}
+
+.detail-box b{
+    display:block;
+    margin-top:5px;
+    font-size:11px;
+}
+
+.status-select{
+    width:100%;
+    margin-top:8px;
+    height:38px;
+    border:1px solid #ddd;
+    border-radius:9px;
+    padding:0 10px;
+    background:#fff;
+}
+
+.save-status{
+    width:100%;
+    margin-top:15px;
+    border:0;
+    background:#111;
+    color:#fff;
+    padding:12px;
+    border-radius:10px;
+    font-size:11px;
+    font-weight:700;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1050px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:850px){
+
+    .sidebar{
+        transform:translateX(-100%);
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .menu{
+        display:block;
+    }
+
+    .table-card{
+        overflow-x:auto;
+    }
+
+    table{
+        min-width:850px;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .content{
+        padding:18px;
+    }
+
+    .header{
+        padding:0 15px;
+    }
+
+    .search{
+        display:none;
+    }
+
+    .page-head h1{
+        font-size:22px;
+    }
+
+    .stats{
+        gap:9px;
+    }
+
+    .stat{
+        padding:13px;
+    }
+
+    .stat h2{
+        font-size:19px;
+    }
+
+    .detail{
+        grid-template-columns:1fr;
+    }
+
+    .detail-box.full{
+        grid-column:auto;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            O
+        </div>
+
+        <div class="logo-text">
+
+            OneEvan AI
+
+            <small>
+                BUSINESS CENTER
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="nav-title">
+        Main
+    </div>
+
+
+    <div class="nav-item"
+         onclick="go('dashboard.html')">
+
+        <span class="nav-icon">📊</span>
+
+        Dashboard
+
+    </div>
+
+
+    <div class="nav-item"
+         onclick="go('products.html')">
+
+        <span class="nav-icon">🛍️</span>
+
+        Products
+
+    </div>
+
+
+    <div class="nav-item active">
+
+        <span class="nav-icon">📦</span>
+
+        Orders
+
+    </div>
+
+
+    <div class="nav-item">
+
+        <span class="nav-icon">👥</span>
+
+        Customers
+
+    </div>
+
+
+    <br>
+
+
+    <div class="nav-title">
+        AI & Channels
+    </div>
+
+
+    <div class="nav-item">
+
+        <span class="nav-icon">🧠</span>
+
+        AI Knowledge
+
+    </div>
+
+
+    <div class="nav-item">
+
+        <span class="nav-icon">🌐</span>
+
+        Website
+
+    </div>
+
+
+    <div class="nav-item">
+
+        <span class="nav-icon">📘</span>
+
+        Facebook
+
+    </div>
+
+
+    <div class="nav-item">
+
+        <span class="nav-icon">🟢</span>
+
+        WhatsApp
+
+    </div>
+
+
+    <br>
+
+
+    <div class="nav-title">
+        System
+    </div>
+
+
+    <div class="nav-item">
+
+        <span class="nav-icon">📈</span>
+
+        Analytics
+
+    </div>
+
+
+    <div class="nav-item">
+
+        <span class="nav-icon">⚙️</span>
+
+        Settings
+
+    </div>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="nav-item"
+             onclick="go('index.html')">
+
+            <span class="nav-icon">🚪</span>
+
+            Logout
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+<header class="header">
+
+    <div class="header-left">
+
+        <button class="menu"
+                onclick="toggleMenu()">
+
+            ☰
+
+        </button>
+
+
+        <div class="search">
+
+            🔍
+
+            <input
+                id="search"
+                placeholder="Search order or customer..."
+                oninput="renderOrders()"
+            >
+
+        </div>
+
+    </div>
+
+
+    <div class="header-right">
+
+        <button class="header-btn">
+            🔔
+        </button>
+
+        <button class="header-btn">
+            🌙
+        </button>
+
+
+        <div class="admin">
+
+            <div class="avatar">
+                A
+            </div>
+
+            <div>
+
+                <b style="font-size:10px;display:block;">
+                    Admin
+                </b>
+
+                <span style="color:#999;font-size:8px;">
+                    Owner
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<section class="content">
+
+
+    <div class="page-head">
+
+        <div>
+
+            <h1>
+                Orders
+            </h1>
+
+            <p>
+                Manage customer orders
+                and delivery status.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+
+        <div class="stat">
+
+            <div class="stat-top">
+
+                <div class="stat-icon">
+                    📦
+                </div>
+
+            </div>
+
+            <small>
+                Total Orders
+            </small>
+
+            <h2 id="totalOrders">
+                0
+            </h2>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-top">
+
+                <div class="stat-icon">
+                    ⏳
+                </div>
+
+            </div>
+
+            <small>
+                Pending
+            </small>
+
+            <h2 id="pendingOrders">
+                0
+            </h2>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-top">
+
+                <div class="stat-icon">
+                    🚚
+                </div>
+
+            </div>
+
+            <small>
+                Shipped
+            </small>
+
+            <h2 id="shippedOrders">
+                0
+            </h2>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-top">
+
+                <div class="stat-icon">
+                    💰
+                </div>
+
+            </div>
+
+            <small>
+                Revenue
+            </small>
+
+            <h2 id="revenue">
+                ৳0
+            </h2>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- TOOLBAR -->
+
+    <div class="toolbar">
+
+        <input
+            id="search2"
+            placeholder="Search by order ID, name or phone..."
+            oninput="syncSearch(this.value)"
+        >
+
+
+        <select
+            id="statusFilter"
+            onchange="renderOrders()">
+
+            <option value="all">
+                All Status
+            </option>
+
+            <option value="Pending">
+                Pending
+            </option>
+
+            <option value="Confirmed">
+                Confirmed
+            </option>
+
+            <option value="Processing">
+                Processing
+            </option>
+
+            <option value="Shipped">
+                Shipped
+            </option>
+
+            <option value="Delivered">
+                Delivered
+            </option>
+
+            <option value="Cancelled">
+                Cancelled
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- TABLE -->
+
+    <div class="table-card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Order
+                    </th>
+
+                    <th>
+                        Customer
+                    </th>
+
+                    <th>
+                        Product
+                    </th>
+
+                    <th>
+                        Amount
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                    <th>
+                        Date
+                    </th>
+
+                    <th>
+                        Action
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="orderTable">
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+</section>
+
+</main>
+
+
+<!-- ORDER MODAL -->
+
+<div class="modal-bg" id="modal">
+
+    <div class="modal">
+
+        <div class="modal-head">
+
+            <h2>
+                Order Details
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div class="detail">
+
+            <div class="detail-box">
+
+                <small>
+                    Order ID
+                </small>
+
+                <b id="dId">
+                    -
+                </b>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <small>
+                    Date
+                </small>
+
+                <b id="dDate">
+                    -
+                </b>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <small>
+                    Customer
+                </small>
+
+                <b id="dName">
+                    -
+                </b>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <small>
+                    Phone
+                </small>
+
+                <b id="dPhone">
+                    -
+                </b>
+
+            </div>
+
+
+            <div class="detail-box full">
+
+                <small>
+                    Address
+                </small>
+
+                <b id="dAddress">
+                    -
+                </b>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <small>
+                    Product
+                </small>
+
+                <b id="dProduct">
+                    -
+                </b>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <small>
+                    Amount
+                </small>
+
+                <b id="dAmount">
+                    -
+                </b>
+
+            </div>
+
+
+            <div class="detail-box full">
+
+                <small>
+                    Order Status
+                </small>
+
+
+                <select
+                    class="status-select"
+                    id="detailStatus">
+
+                    <option>
+                        Pending
+                    </option>
+
+                    <option>
+                        Confirmed
+                    </option>
+
+                    <option>
+                        Processing
+                    </option>
+
+                    <option>
+                        Shipped
+                    </option>
+
+                    <option>
+                        Delivered
+                    </option>
+
+                    <option>
+                        Cancelled
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="save-status"
+            onclick="updateStatus()">
+
+            Update Order Status
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* DEMO ORDERS */
+
+const defaultOrders = [
+
+    {
+        id:"ORD-1024",
+        name:"Tanzeem Ahmed",
+        phone:"01700000000",
+        address:"Dhaka, Bangladesh",
+        product:"TIME IS MONEY T-Shirt",
+        amount:1999,
+        status:"Pending",
+        date:"22 Aug 2026"
+    },
+
+    {
+        id:"ORD-1023",
+        name:"Rahim Hasan",
+        phone:"01800000000",
+        address:"Chittagong, Bangladesh",
+        product:"Premium Oversized T-Shirt",
+        amount:1799,
+        status:"Confirmed",
+        date:"22 Aug 2026"
+    },
+
+    {
+        id:"ORD-1022",
+        name:"Sadia Akter",
+        phone:"01900000000",
+        address:"Sylhet, Bangladesh",
+        product:"Premium Hoodie",
+        amount:2499,
+        status:"Processing",
+        date:"21 Aug 2026"
+    },
+
+    {
+        id:"ORD-1021",
+        name:"Nayeem Islam",
+        phone:"01600000000",
+        address:"Rajshahi, Bangladesh",
+        product:"TIME IS MONEY T-Shirt",
+        amount:1999,
+        status:"Shipped",
+        date:"20 Aug 2026"
+    },
+
+    {
+        id:"ORD-1020",
+        name:"Fahim Khan",
+        phone:"01500000000",
+        address:"Khulna, Bangladesh",
+        product:"Premium Hoodie",
+        amount:2499,
+        status:"Delivered",
+        date:"19 Aug 2026"
+    }
+
+];
+
+
+let orders =
+JSON.parse(
+    localStorage.getItem("oneevan_orders")
+) || defaultOrders;
+
+
+let selectedOrderId=null;
+
+
+/* SAVE */
+
+function saveOrders(){
+
+    localStorage.setItem(
+        "oneevan_orders",
+        JSON.stringify(orders)
+    );
+
+}
+
+
+/* STATUS CLASS */
+
+function statusClass(status){
+
+    return status
+        .toLowerCase()
+        .replace(" ","-");
+
+}
+
+
+/* RENDER */
+
+function renderOrders(){
+
+    const search =
+        document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+
+    const filter =
+        document
+        .getElementById("statusFilter")
+        .value;
+
+
+    const list =
+        orders.filter(order=>{
+
+            const text =
+            (
+                order.id+
+                " "+
+                order.name+
+                " "+
+                order.phone+
+                " "+
+                order.product
+            ).toLowerCase();
+
+
+            const matchesSearch =
+                text.includes(search);
+
+
+            const matchesStatus =
+                filter==="all" ||
+                order.status===filter;
+
+
+            return (
+                matchesSearch &&
+                matchesStatus
+            );
+
+        });
+
+
+    const table =
+        document.getElementById("orderTable");
+
+
+    table.innerHTML="";
+
+
+    list.forEach(order=>{
+
+        table.innerHTML += `
+
+        <tr>
+
+            <td>
+
+                <div class="order-id">
+                    ${escapeHTML(order.id)}
+                </div>
+
+            </td>
+
+
+            <td>
+
+                <div class="customer">
+
+                    <div class="customer-avatar">
+                        👤
+                    </div>
+
+                    <div class="customer-info">
+
+                        <b>
+                            ${escapeHTML(order.name)}
+                        </b>
+
+                        <span>
+                            ${escapeHTML(order.phone)}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </td>
+
+
+            <td>
+                ${escapeHTML(order.product)}
+            </td>
+
+
+            <td>
+
+                <div class="amount">
+                    ৳${Number(order.amount).toLocaleString()}
+                </div>
+
+            </td>
+
+
+            <td>
+
+                <span
+                    class="badge ${statusClass(order.status)}">
+
+                    ${escapeHTML(order.status)}
+
+                </span>
+
+            </td>
+
+
+            <td>
+                ${escapeHTML(order.date)}
+            </td>
+
+
+            <td>
+
+                <button
+                    class="action"
+                    onclick="openOrder('${order.id}')">
+
+                    👁️
+
+                </button>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+
+    updateStats();
+
+}
+
+
+/* STATS */
+
+function updateStats(){
+
+    document.getElementById("totalOrders")
+        .textContent=orders.length;
+
+
+    document.getElementById("pendingOrders")
+        .textContent=
+        orders.filter(
+            o=>o.status==="Pending"
+        ).length;
+
+
+    document.getElementById("shippedOrders")
+        .textContent=
+        orders.filter(
+            o=>o.status==="Shipped"
+        ).length;
+
+
+    const revenue =
+        orders
+        .filter(
+            o=>o.status!=="Cancelled"
+        )
+        .reduce(
+            (sum,o)=>
+            sum+Number(o.amount),
+            0
+        );
+
+
+    document.getElementById("revenue")
+        .textContent=
+        "৳"+
+        revenue.toLocaleString();
+
+}
+
+
+/* OPEN ORDER */
+
+function openOrder(id){
+
+    const order =
+        orders.find(
+            o=>o.id===id
+        );
+
+
+    if(!order) return;
+
+
+    selectedOrderId=id;
+
+
+    document.getElementById("dId")
+        .textContent=order.id;
+
+
+    document.getElementById("dDate")
+        .textContent=order.date;
+
+
+    document.getElementById("dName")
+        .textContent=order.name;
+
+
+    document.getElementById("dPhone")
+        .textContent=order.phone;
+
+
+    document.getElementById("dAddress")
+        .textContent=order.address;
+
+
+    document.getElementById("dProduct")
+        .textContent=order.product;
+
+
+    document.getElementById("dAmount")
+        .textContent=
+        "৳"+
+        Number(order.amount)
+        .toLocaleString();
+
+
+    document.getElementById("detailStatus")
+        .value=order.status;
+
+
+    document
+        .getElementById("modal")
+        .classList.add("show");
+
+}
+
+
+/* UPDATE STATUS */
+
+function updateStatus(){
+
+    if(!selectedOrderId)
+        return;
+
+
+    const order =
+        orders.find(
+            o=>o.id===selectedOrderId
+        );
+
+
+    if(!order)
+        return;
+
+
+    order.status =
+        document
+        .getElementById("detailStatus")
+        .value;
+
+
+    saveOrders();
+
+    renderOrders();
+
+    closeModal();
+
+
+    alert(
+        "✅ Order status updated successfully."
+    );
+
+}
+
+
+/* CLOSE */
+
+function closeModal(){
+
+    document
+        .getElementById("modal")
+        .classList.remove("show");
+
+}
+
+
+/* SEARCH */
+
+function syncSearch(value){
+
+    document.getElementById("search")
+        .value=value;
+
+    renderOrders();
+
+}
+
+
+/* MENU */
+
+function toggleMenu(){
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
+}
+
+
+/* NAVIGATION */
+
+function go(page){
+
+    window.location.href=page;
+
+}
+
+
+/* SECURITY */
+
+function escapeHTML(value){
+
+    return String(value)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
+}
+
+
+/* START */
+
+renderOrders();
+
+</script>
+
+</body>
+</html>
