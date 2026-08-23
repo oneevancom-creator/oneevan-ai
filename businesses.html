@@ -1,1 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>OneEvan AI - Businesses</title>
+
+
+    <!-- Firebase -->
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+
+    <script src="firebase-config.js"></script>
+
+</head>
+
+
+<body>
+
+    <h1>
+        My Businesses
+    </h1>
+
+
+    <button onclick="addBusiness()">
+        + Add Business
+    </button>
+
+
+    <div id="businessList"></div>
+
+
+    <script>
+
+        // Firebase Database
+
+        const db =
+            firebase.firestore();
+
+
+        // Add Business
+
+        async function addBusiness() {
+
+            const name =
+                prompt("Business Name লিখুন:");
+
+
+            if (!name) {
+
+                return;
+
+            }
+
+
+            try {
+
+                await db
+                    .collection("businesses")
+                    .add({
+
+                        name: name,
+
+                        createdAt:
+                            firebase.firestore
+                            .FieldValue
+                            .serverTimestamp()
+
+                    });
+
+
+                alert(
+                    "Business Added Successfully ✅"
+                );
+
+
+                loadBusinesses();
+
+            }
+
+
+            catch(error) {
+
+                console.error(error);
+
+                alert(
+                    "Business Save হয়নি ❌\n\n" +
+                    error.message
+                );
+
+            }
+
+        }
+
+
+        // Load Businesses
+
+        async function loadBusinesses() {
+
+            const list =
+                document.getElementById(
+                    "businessList"
+                );
+
+
+            list.innerHTML = "";
+
+
+            try {
+
+                const snapshot =
+                    await db
+                    .collection("businesses")
+                    .get();
+
+
+                snapshot.forEach(doc => {
+
+                    const data =
+                        doc.data();
+
+
+                    const business =
+                        document.createElement("p");
+
+
+                    business.innerHTML =
+                        "🏢 " + data.name;
+
+
+                    list.appendChild(
+                        business
+                    );
+
+                });
+
+            }
+
+
+            catch(error) {
+
+                console.error(error);
+
+                alert(
+                    "Business Load হয়নি ❌\n\n" +
+                    error.message
+                );
+
+            }
+
+        }
+
+
+        // Page Open হলে Business দেখাবে
+
+        loadBusinesses();
+
+    </script>
+
+
+</body>
+
+</html>
