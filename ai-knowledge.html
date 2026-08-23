@@ -2,29 +2,39 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>OneEvan AI — Knowledge</title>
-
-    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
-
-    <script src="firebase-config.js"></script>
-
+    <title>OneEvan AI</title>
 </head>
 
 <body>
 
-    <h1>OneEvan AI Knowledge</h1>
+    <h1>OneEvan AI</h1>
 
-    <p>AI Knowledge Page তৈরি হচ্ছে...</p>
+    <label>Select Business</label>
 
-    <button onclick="alert('TEST OK')">
-        Test Firebase
+    <br><br>
+
+    <select id="business">
+        <option>Business 1</option>
+        <option>Business 2</option>
+        <option>Business 3</option>
+    </select>
+
+    <br><br>
+
+    <button onclick="addBusiness()">
+        + Add New Business
     </button>
+
+    <script>
+
+        function addBusiness() {
+            alert("New Business যোগ করার ব্যবস্থা পরে করব");
+        }
+
+    </script>
 
 </body>
 
