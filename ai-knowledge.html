@@ -12,26 +12,50 @@
 
     <h1>OneEvan AI</h1>
 
-    <label>Select Business</label>
+    <h3>Select Business</h3>
 
-    <br><br>
-
-    <select id="business">
-        <option>Business 1</option>
-        <option>Business 2</option>
-        <option>Business 3</option>
+    <select id="businessList">
+        <option value="">Select Business</option>
     </select>
 
     <br><br>
 
+    <input
+        type="text"
+        id="businessName"
+        placeholder="Business Name"
+    >
+
     <button onclick="addBusiness()">
-        + Add New Business
+        + Add Business
     </button>
+
 
     <script>
 
         function addBusiness() {
-            alert("New Business যোগ করার ব্যবস্থা পরে করব");
+
+            const name =
+                document.getElementById("businessName").value.trim();
+
+            if (!name) {
+                alert("Business Name দিন");
+                return;
+            }
+
+            const option =
+                document.createElement("option");
+
+            option.textContent = name;
+            option.value = name;
+
+            document
+                .getElementById("businessList")
+                .appendChild(option);
+
+            document.getElementById("businessName").value = "";
+
+            alert(name + " Added ✅");
         }
 
     </script>
