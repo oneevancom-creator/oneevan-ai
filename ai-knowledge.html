@@ -3,103 +3,489 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-    <title>OneEvan AI</title>
+<title>OneEvan AI - Knowledge</title>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 
-    <!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="firebase-config.js"></script>
 
-    <script src="firebase-config.js"></script>
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f5f5f7;
+    color:#111;
+}
+
+.header{
+    background:#111;
+    color:white;
+    padding:18px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.header h2{
+    margin:0;
+    font-size:17px;
+}
+
+.back{
+    border:0;
+    background:white;
+    color:#111;
+    padding:9px 14px;
+    border-radius:9px;
+    cursor:pointer;
+}
+
+.content{
+    padding:25px;
+    max-width:900px;
+    margin:auto;
+}
+
+.business{
+    background:white;
+    padding:18px;
+    border-radius:15px;
+    margin-bottom:18px;
+}
+
+.business small{
+    color:#888;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:17px;
+    border:1px solid #e5e5e5;
+}
+
+label{
+    display:block;
+    font-size:12px;
+    font-weight:bold;
+    margin:15px 0 6px;
+}
+
+input,
+textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-family:Arial;
+}
+
+textarea{
+    min-height:130px;
+    resize:vertical;
+}
+
+.save{
+    margin-top:18px;
+    width:100%;
+    padding:13px;
+    background:#111;
+    color:white;
+    border:0;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.status{
+    margin-top:15px;
+    font-size:12px;
+}
+
+</style>
 
 </head>
 
 
 <body>
 
-    <h1>OneEvan AI</h1>
 
+<div class="header">
 
-    <h3>Select Business</h3>
+    <h2>
+        🧠 AI Knowledge
+    </h2>
 
+    <button
+        class="back"
+        onclick="goBack()">
 
-    <select id="businessList">
-
-        <option value="">
-            Select Business
-        </option>
-
-    </select>
-
-
-    <br><br>
-
-
-    <input
-        type="text"
-        id="businessName"
-        placeholder="Business Name"
-    >
-
-
-    <button onclick="addBusiness()">
-
-        + Add Business
+        ← Dashboard
 
     </button>
 
-
-    <script>
-
-
-        function addBusiness() {
-
-            const name =
-                document
-                .getElementById("businessName")
-                .value
-                .trim();
+</div>
 
 
-            if (!name) {
-
-                alert("Business Name দিন");
-
-                return;
-
-            }
+<div class="content">
 
 
-            const option =
-                document.createElement("option");
+    <div class="business">
+
+        <b id="businessName">
+            Loading Business...
+        </b>
+
+        <br>
+
+        <small>
+            এই Business-এর AI Knowledge
+        </small>
+
+    </div>
 
 
-            option.textContent = name;
+    <div class="card">
 
-            option.value = name;
-
-
-            document
-                .getElementById("businessList")
-                .appendChild(option);
+        <h3>
+            Business Information
+        </h3>
 
 
-            document
-                .getElementById("businessName")
-                .value = "";
+        <label>
+            Business Description
+        </label>
+
+        <textarea
+            id="description"
+            placeholder="এই Business সম্পর্কে লিখুন...">
+        </textarea>
 
 
-            alert(name + " Added ✅");
+        <label>
+            Delivery Information
+        </label>
+
+        <textarea
+            id="delivery"
+            placeholder="Delivery charge, delivery time, areas...">
+        </textarea>
+
+
+        <label>
+            Payment Information
+        </label>
+
+        <textarea
+            id="payment"
+            placeholder="Cash on Delivery, bKash, Nagad ইত্যাদি...">
+        </textarea>
+
+
+        <label>
+            Return / Exchange Policy
+        </label>
+
+        <textarea
+            id="returnPolicy"
+            placeholder="Return এবং Exchange policy লিখুন...">
+        </textarea>
+
+
+        <label>
+            Important AI Rules
+        </label>
+
+        <textarea
+            id="aiRules"
+            placeholder="AI যেন কোনো তথ্য অনুমান করে না বলে...">
+        </textarea>
+
+
+        <button
+            class="save"
+            onclick="saveKnowledge()">
+
+            💾 Save AI Knowledge
+
+        </button>
+
+
+        <div
+            id="status"
+            class="status">
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+// ===============================
+// GET BUSINESS ID
+// ===============================
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const businessId =
+    params.get("id");
+
+
+// ===============================
+// CHECK BUSINESS
+// ===============================
+
+if(!businessId){
+
+    alert(
+        "Business ID পাওয়া যায়নি।"
+    );
+
+    window.location.href =
+        "businesses.html";
+
+}
+
+
+// ===============================
+// LOAD BUSINESS
+// ===============================
+
+async function loadBusiness(){
+
+    try{
+
+        const doc =
+            await db
+            .collection("businesses")
+            .doc(businessId)
+            .get();
+
+
+        if(!doc.exists){
+
+            alert(
+                "Business পাওয়া যায়নি।"
+            );
+
+            return;
 
         }
 
 
-    </script>
+        const data =
+            doc.data();
+
+
+        document
+        .getElementById("businessName")
+        .textContent =
+        data.name;
+
+
+        loadKnowledge();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "Business load হয়নি ❌"
+        );
+
+    }
+
+}
+
+
+// ===============================
+// LOAD AI KNOWLEDGE
+// ===============================
+
+async function loadKnowledge(){
+
+    try{
+
+        const doc =
+            await db
+            .collection("businesses")
+            .doc(businessId)
+            .collection("aiKnowledge")
+            .doc("main")
+            .get();
+
+
+        if(!doc.exists){
+
+            return;
+
+        }
+
+
+        const data =
+            doc.data();
+
+
+        document
+        .getElementById("description")
+        .value =
+        data.description || "";
+
+
+        document
+        .getElementById("delivery")
+        .value =
+        data.delivery || "";
+
+
+        document
+        .getElementById("payment")
+        .value =
+        data.payment || "";
+
+
+        document
+        .getElementById("returnPolicy")
+        .value =
+        data.returnPolicy || "";
+
+
+        document
+        .getElementById("aiRules")
+        .value =
+        data.aiRules || "";
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+// ===============================
+// SAVE AI KNOWLEDGE
+// ===============================
+
+async function saveKnowledge(){
+
+    const data = {
+
+        description:
+        document
+        .getElementById("description")
+        .value
+        .trim(),
+
+        delivery:
+        document
+        .getElementById("delivery")
+        .value
+        .trim(),
+
+        payment:
+        document
+        .getElementById("payment")
+        .value
+        .trim(),
+
+        returnPolicy:
+        document
+        .getElementById("returnPolicy")
+        .value
+        .trim(),
+
+        aiRules:
+        document
+        .getElementById("aiRules")
+        .value
+        .trim(),
+
+        updatedAt:
+        firebase.firestore
+        .FieldValue
+        .serverTimestamp()
+
+    };
+
+
+    try{
+
+        await db
+        .collection("businesses")
+        .doc(businessId)
+        .collection("aiKnowledge")
+        .doc("main")
+        .set(data);
+
+
+        document
+        .getElementById("status")
+        .textContent =
+        "✅ AI Knowledge Saved Successfully";
+
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        document
+        .getElementById("status")
+        .textContent =
+        "❌ Save হয়নি: " +
+        error.message;
+
+    }
+
+}
+
+
+// ===============================
+// BACK
+// ===============================
+
+function goBack(){
+
+    window.location.href =
+        "business.html?id=" +
+        businessId;
+
+}
+
+
+// ===============================
+// START
+// ===============================
+
+loadBusiness();
+
+</script>
 
 
 </body>
