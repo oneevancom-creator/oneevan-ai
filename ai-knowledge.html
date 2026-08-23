@@ -3,117 +3,412 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<title>OneEvan AI - Knowledge</title>
+    <title>OneEvan AI - Knowledge</title>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+    <!-- Firebase -->
 
-<script src="firebase-config.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 
-<style>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
 
-*{
-    box-sizing:border-box;
-}
+    <script src="firebase-config.js"></script>
 
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f5f5f7;
-    color:#111;
-}
 
-.header{
-    background:#111;
-    color:white;
-    padding:18px 25px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
+    <style>
 
-.header h2{
-    margin:0;
-    font-size:17px;
-}
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
 
-.back{
-    border:0;
-    background:white;
-    color:#111;
-    padding:9px 14px;
-    border-radius:9px;
-    cursor:pointer;
-}
 
-.content{
-    padding:25px;
-    max-width:900px;
-    margin:auto;
-}
+        body{
 
-.business{
-    background:white;
-    padding:18px;
-    border-radius:15px;
-    margin-bottom:18px;
-}
+            font-family:
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            Arial,
+            sans-serif;
 
-.business small{
-    color:#888;
-}
+            background:#f5f5f7;
 
-.card{
-    background:white;
-    padding:20px;
-    border-radius:17px;
-    border:1px solid #e5e5e5;
-}
+            color:#111;
 
-label{
-    display:block;
-    font-size:12px;
-    font-weight:bold;
-    margin:15px 0 6px;
-}
+            min-height:100vh;
 
-input,
-textarea{
-    width:100%;
-    padding:12px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    font-family:Arial;
-}
+        }
 
-textarea{
-    min-height:130px;
-    resize:vertical;
-}
 
-.save{
-    margin-top:18px;
-    width:100%;
-    padding:13px;
-    background:#111;
-    color:white;
-    border:0;
-    border-radius:10px;
-    cursor:pointer;
-}
+        /* =========================
+           HEADER
+        ========================= */
 
-.status{
-    margin-top:15px;
-    font-size:12px;
-}
+        .header{
 
-</style>
+            height:70px;
+
+            background:#090909;
+
+            color:white;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            padding:0 25px;
+
+        }
+
+
+        .logo{
+
+            display:flex;
+
+            align-items:center;
+
+            gap:10px;
+
+            font-size:16px;
+
+            font-weight:700;
+
+        }
+
+
+        .logo-icon{
+
+            width:36px;
+
+            height:36px;
+
+            border-radius:10px;
+
+            background:white;
+
+            color:#111;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            font-weight:800;
+
+        }
+
+
+        .back-btn{
+
+            border:0;
+
+            background:white;
+
+            color:#111;
+
+            padding:9px 14px;
+
+            border-radius:9px;
+
+            cursor:pointer;
+
+            font-size:11px;
+
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .content{
+
+            max-width:900px;
+
+            margin:auto;
+
+            padding:30px;
+
+        }
+
+
+        .page-title{
+
+            margin-bottom:25px;
+
+        }
+
+
+        .page-title h1{
+
+            font-size:27px;
+
+            letter-spacing:-.5px;
+
+        }
+
+
+        .page-title p{
+
+            color:#888;
+
+            font-size:12px;
+
+            margin-top:6px;
+
+        }
+
+
+        /* =========================
+           BUSINESS
+        ========================= */
+
+        .business-box{
+
+            background:white;
+
+            border:1px solid #e5e5e5;
+
+            border-radius:17px;
+
+            padding:18px;
+
+            margin-bottom:18px;
+
+        }
+
+
+        .business-box small{
+
+            color:#999;
+
+            font-size:10px;
+
+        }
+
+
+        .business-name{
+
+            display:block;
+
+            font-size:17px;
+
+            margin-top:5px;
+
+        }
+
+
+        /* =========================
+           CARD
+        ========================= */
+
+        .card{
+
+            background:white;
+
+            border:1px solid #e5e5e5;
+
+            border-radius:18px;
+
+            padding:22px;
+
+        }
+
+
+        .card-title{
+
+            font-size:15px;
+
+            margin-bottom:5px;
+
+        }
+
+
+        .card-subtitle{
+
+            color:#999;
+
+            font-size:10px;
+
+            margin-bottom:20px;
+
+        }
+
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group{
+
+            margin-bottom:17px;
+
+        }
+
+
+        label{
+
+            display:block;
+
+            font-size:11px;
+
+            font-weight:700;
+
+            margin-bottom:7px;
+
+        }
+
+
+        textarea{
+
+            width:100%;
+
+            min-height:100px;
+
+            border:1px solid #ddd;
+
+            border-radius:11px;
+
+            padding:12px;
+
+            font-family:inherit;
+
+            font-size:11px;
+
+            outline:none;
+
+            resize:vertical;
+
+            background:#fafafa;
+
+        }
+
+
+        textarea:focus{
+
+            border-color:#111;
+
+            background:white;
+
+        }
+
+
+        /* =========================
+           SAVE
+        ========================= */
+
+        .save-btn{
+
+            width:100%;
+
+            border:0;
+
+            background:#111;
+
+            color:white;
+
+            padding:13px;
+
+            border-radius:11px;
+
+            cursor:pointer;
+
+            font-size:11px;
+
+            font-weight:600;
+
+        }
+
+
+        .save-btn:hover{
+
+            background:#222;
+
+        }
+
+
+        .save-btn:disabled{
+
+            opacity:.6;
+
+            cursor:not-allowed;
+
+        }
+
+
+        .status{
+
+            text-align:center;
+
+            font-size:11px;
+
+            margin-top:13px;
+
+            min-height:18px;
+
+        }
+
+
+        .success{
+
+            color:#1b8a4b;
+
+        }
+
+
+        .error{
+
+            color:#d93025;
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media(max-width:600px){
+
+            .header{
+
+                padding:0 15px;
+
+            }
+
+
+            .content{
+
+                padding:18px;
+
+            }
+
+
+            .page-title h1{
+
+                font-size:23px;
+
+            }
+
+
+            .card{
+
+                padding:17px;
+
+            }
+
+        }
+
+    </style>
 
 </head>
 
@@ -121,100 +416,188 @@ textarea{
 <body>
 
 
-<div class="header">
+<!-- =========================
+     HEADER
+========================= -->
 
-    <h2>
-        🧠 AI Knowledge
-    </h2>
+<header class="header">
+
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            ✦
+        </div>
+
+        OneEvan AI
+
+    </div>
+
 
     <button
-        class="back"
+        class="back-btn"
         onclick="goBack()">
 
         ← Dashboard
 
     </button>
 
-</div>
+
+</header>
 
 
-<div class="content">
+
+<!-- =========================
+     CONTENT
+========================= -->
+
+<main class="content">
 
 
-    <div class="business">
+    <div class="page-title">
 
-        <b id="businessName">
-            Loading Business...
-        </b>
+        <h1>
+            🧠 AI Knowledge
+        </h1>
 
-        <br>
-
-        <small>
-            এই Business-এর AI Knowledge
-        </small>
+        <p>
+            Teach your AI assistant about this business.
+        </p>
 
     </div>
 
 
+
+    <!-- BUSINESS -->
+
+    <div class="business-box">
+
+        <small>
+            CURRENT BUSINESS
+        </small>
+
+        <span
+            id="businessName"
+            class="business-name">
+
+            Loading...
+
+        </span>
+
+    </div>
+
+
+
+    <!-- KNOWLEDGE FORM -->
+
     <div class="card">
 
-        <h3>
+
+        <h2 class="card-title">
+
             Business Information
-        </h3>
+
+        </h2>
 
 
-        <label>
-            Business Description
-        </label>
+        <p class="card-subtitle">
 
-        <textarea
-            id="description"
-            placeholder="এই Business সম্পর্কে লিখুন...">
-        </textarea>
+            এই তথ্যগুলো AI customer-এর প্রশ্নের উত্তর দেওয়ার সময় ব্যবহার করবে।
+
+        </p>
 
 
-        <label>
-            Delivery Information
-        </label>
 
-        <textarea
-            id="delivery"
-            placeholder="Delivery charge, delivery time, areas...">
-        </textarea>
+        <!-- DESCRIPTION -->
 
+        <div class="form-group">
 
-        <label>
-            Payment Information
-        </label>
+            <label>
+                Business Description
+            </label>
 
-        <textarea
-            id="payment"
-            placeholder="Cash on Delivery, bKash, Nagad ইত্যাদি...">
-        </textarea>
+            <textarea
+                id="description"
+                placeholder="যেমন: OneEvan একটি premium fashion brand যা বাংলাদেশে stylish clothing বিক্রি করে।">
+            </textarea>
+
+        </div>
 
 
-        <label>
-            Return / Exchange Policy
-        </label>
 
-        <textarea
-            id="returnPolicy"
-            placeholder="Return এবং Exchange policy লিখুন...">
-        </textarea>
+        <!-- DELIVERY -->
+
+        <div class="form-group">
+
+            <label>
+                Delivery Information
+            </label>
+
+            <textarea
+                id="delivery"
+                placeholder="যেমন: ঢাকা শহরে delivery 2-3 দিন। ঢাকার বাইরে 3-5 দিন। Delivery charge 100 টাকা।">
+            </textarea>
+
+        </div>
 
 
-        <label>
-            Important AI Rules
-        </label>
 
-        <textarea
-            id="aiRules"
-            placeholder="AI যেন কোনো তথ্য অনুমান করে না বলে...">
-        </textarea>
+        <!-- PAYMENT -->
 
+        <div class="form-group">
+
+            <label>
+                Payment Information
+            </label>
+
+            <textarea
+                id="payment"
+                placeholder="যেমন: Cash on Delivery, bKash, Nagad এবং Bank Payment available।">
+            </textarea>
+
+        </div>
+
+
+
+        <!-- RETURN -->
+
+        <div class="form-group">
+
+            <label>
+                Return / Exchange Policy
+            </label>
+
+            <textarea
+                id="returnPolicy"
+                placeholder="যেমন: Product পাওয়ার 3 দিনের মধ্যে exchange request করা যাবে।">
+            </textarea>
+
+        </div>
+
+
+
+        <!-- AI RULES -->
+
+        <div class="form-group">
+
+            <label>
+                Important AI Rules
+            </label>
+
+            <textarea
+                id="aiRules"
+                placeholder="যেমন: AI কোনো price বা product information অনুমান করবে না। তথ্য না থাকলে customer-কে support-এর সাথে যোগাযোগ করতে বলবে।">
+            </textarea>
+
+        </div>
+
+
+
+        <!-- SAVE -->
 
         <button
-            class="save"
+            id="saveButton"
+            class="save-btn"
             onclick="saveKnowledge()">
 
             💾 Save AI Knowledge
@@ -227,79 +610,98 @@ textarea{
             class="status">
         </div>
 
+
     </div>
 
 
-</div>
+</main>
+
 
 
 <script>
 
 
-// ===============================
-// GET BUSINESS ID
-// ===============================
+/* =========================
+   BUSINESS ID
+========================= */
 
-const params =
+const urlParams =
     new URLSearchParams(
         window.location.search
     );
 
 
 const businessId =
-    params.get("id");
+    urlParams.get("id");
 
 
-// ===============================
-// CHECK BUSINESS
-// ===============================
+
+/* =========================
+   FIREBASE DATABASE
+========================= */
+
+const database =
+    firebase.firestore();
+
+
+
+/* =========================
+   CHECK BUSINESS ID
+========================= */
 
 if(!businessId){
 
-    alert(
-        "Business ID পাওয়া যায়নি।"
-    );
-
-    window.location.href =
-        "businesses.html";
+    document
+    .getElementById("businessName")
+    .textContent =
+    "Business ID পাওয়া যায়নি ❌";
 
 }
 
 
-// ===============================
-// LOAD BUSINESS
-// ===============================
+
+/* =========================
+   LOAD BUSINESS
+========================= */
 
 async function loadBusiness(){
 
+    if(!businessId){
+
+        return;
+
+    }
+
+
     try{
 
-        const doc =
-            await db
+        const businessDoc =
+            await database
             .collection("businesses")
             .doc(businessId)
             .get();
 
 
-        if(!doc.exists){
+        if(!businessDoc.exists){
 
-            alert(
-                "Business পাওয়া যায়নি।"
-            );
+            document
+            .getElementById("businessName")
+            .textContent =
+            "Business পাওয়া যায়নি ❌";
 
             return;
 
         }
 
 
-        const data =
-            doc.data();
+        const businessData =
+            businessDoc.data();
 
 
         document
         .getElementById("businessName")
         .textContent =
-        data.name;
+        businessData.name;
 
 
         loadKnowledge();
@@ -310,33 +712,41 @@ async function loadBusiness(){
 
         console.error(error);
 
-        alert(
-            "Business load হয়নি ❌"
-        );
+
+        document
+        .getElementById("businessName")
+        .textContent =
+        "Error loading business ❌";
 
     }
 
 }
 
 
-// ===============================
-// LOAD AI KNOWLEDGE
-// ===============================
+
+/* =========================
+   LOAD KNOWLEDGE
+========================= */
 
 async function loadKnowledge(){
 
     try{
 
-        const doc =
-            await db
+        const knowledgeDoc =
+            await database
+
             .collection("businesses")
+
             .doc(businessId)
+
             .collection("aiKnowledge")
+
             .doc("main")
+
             .get();
 
 
-        if(!doc.exists){
+        if(!knowledgeDoc.exists){
 
             return;
 
@@ -344,7 +754,7 @@ async function loadKnowledge(){
 
 
         const data =
-            doc.data();
+            knowledgeDoc.data();
 
 
         document
@@ -387,13 +797,37 @@ async function loadKnowledge(){
 }
 
 
-// ===============================
-// SAVE AI KNOWLEDGE
-// ===============================
+
+/* =========================
+   SAVE KNOWLEDGE
+========================= */
 
 async function saveKnowledge(){
 
-    const data = {
+    if(!businessId){
+
+        showStatus(
+            "Business ID পাওয়া যায়নি ❌",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const saveButton =
+        document
+        .getElementById("saveButton");
+
+
+    saveButton.disabled = true;
+
+    saveButton.textContent =
+        "Saving...";
+
+
+    const knowledge = {
 
         description:
         document
@@ -401,11 +835,13 @@ async function saveKnowledge(){
         .value
         .trim(),
 
+
         delivery:
         document
         .getElementById("delivery")
         .value
         .trim(),
+
 
         payment:
         document
@@ -413,17 +849,20 @@ async function saveKnowledge(){
         .value
         .trim(),
 
+
         returnPolicy:
         document
         .getElementById("returnPolicy")
         .value
         .trim(),
 
+
         aiRules:
         document
         .getElementById("aiRules")
         .value
         .trim(),
+
 
         updatedAt:
         firebase.firestore
@@ -435,19 +874,28 @@ async function saveKnowledge(){
 
     try{
 
-        await db
+        await database
+
         .collection("businesses")
+
         .doc(businessId)
+
         .collection("aiKnowledge")
+
         .doc("main")
-        .set(data);
+
+        .set(
+            knowledge,
+            {
+                merge:true
+            }
+        );
 
 
-        document
-        .getElementById("status")
-        .textContent =
-        "✅ AI Knowledge Saved Successfully";
-
+        showStatus(
+            "✅ AI Knowledge Saved Successfully!",
+            "success"
+        );
 
     }
 
@@ -455,20 +903,54 @@ async function saveKnowledge(){
 
         console.error(error);
 
-        document
-        .getElementById("status")
-        .textContent =
-        "❌ Save হয়নি: " +
-        error.message;
+
+        showStatus(
+            "❌ Save হয়নি: " +
+            error.message,
+            "error"
+        );
 
     }
+
+
+    saveButton.disabled = false;
+
+    saveButton.textContent =
+        "💾 Save AI Knowledge";
 
 }
 
 
-// ===============================
-// BACK
-// ===============================
+
+/* =========================
+   STATUS
+========================= */
+
+function showStatus(
+    message,
+    type
+){
+
+    const status =
+        document
+        .getElementById("status");
+
+
+    status.textContent =
+        message;
+
+
+    status.className =
+        "status " +
+        type;
+
+}
+
+
+
+/* =========================
+   BACK
+========================= */
 
 function goBack(){
 
@@ -479,11 +961,13 @@ function goBack(){
 }
 
 
-// ===============================
-// START
-// ===============================
+
+/* =========================
+   START
+========================= */
 
 loadBusiness();
+
 
 </script>
 
