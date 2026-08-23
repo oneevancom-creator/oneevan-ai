@@ -2,23 +2,43 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>OneEvan AI</title>
+
+
+    <!-- Firebase -->
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+
+    <script src="firebase-config.js"></script>
+
 </head>
+
 
 <body>
 
     <h1>OneEvan AI</h1>
 
+
     <h3>Select Business</h3>
 
+
     <select id="businessList">
-        <option value="">Select Business</option>
+
+        <option value="">
+            Select Business
+        </option>
+
     </select>
 
+
     <br><br>
+
 
     <input
         type="text"
@@ -26,39 +46,61 @@
         placeholder="Business Name"
     >
 
+
     <button onclick="addBusiness()">
+
         + Add Business
+
     </button>
 
 
     <script>
 
+
         function addBusiness() {
 
             const name =
-                document.getElementById("businessName").value.trim();
+                document
+                .getElementById("businessName")
+                .value
+                .trim();
+
 
             if (!name) {
+
                 alert("Business Name দিন");
+
                 return;
+
             }
+
 
             const option =
                 document.createElement("option");
 
+
             option.textContent = name;
+
             option.value = name;
+
 
             document
                 .getElementById("businessList")
                 .appendChild(option);
 
-            document.getElementById("businessName").value = "";
+
+            document
+                .getElementById("businessName")
+                .value = "";
+
 
             alert(name + " Added ✅");
+
         }
 
+
     </script>
+
 
 </body>
 
